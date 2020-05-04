@@ -1,8 +1,9 @@
 const connection = require('./xmpp');
+const { xml } = require('@xmpp/client');
 const conArr = [];
 const master = function () {
     const con = new connection();
-    const id1 = con.init('cbbot', 'cbbot@321#');
+    const id1 = con.init('cbquizbot', 'chitbuzz!123##');
     id1.on("stanza", async (stanza) => {
         if (stanza.is('message') && stanza.getChild('body') && stanza.getChild('body').text()) {
             if (stanza.attrs.type === 'chat') {
@@ -16,6 +17,14 @@ const master = function () {
                     }
 
                 }
+            } else if (stanza.attrs.type === 'subscribe') {
+                let message = xml(
+                    "presence",
+                    {
+                        type: "subscribed", from: this.address,
+                        to: stanza.attrs.from
+                    });
+                id1.send(message);
             }
         }
     });
