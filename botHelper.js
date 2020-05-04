@@ -56,6 +56,7 @@ module.exports = function (messageHandler, roomName, master) {
                         sendMsg(data[0])
                     } else {
                         if (idleTry >= 5) {
+idleTry=0;
                             sendMsg('Fools Correct answer is ' + currentAns);
                         } else {
                             idleTry++;
@@ -102,6 +103,7 @@ module.exports = function (messageHandler, roomName, master) {
     function handleMsg(msg, from) {
         if (msg.trim().toLowerCase() == currentAns.trim().toLowerCase()) {
             currentAns = null;
+idleTry=0;
             if (groupScores.scores.hasOwnProperty(from)) {
                 groupScores.scores[from].correct++;
                 groupScores.scores[from].score += 100;
