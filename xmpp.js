@@ -15,7 +15,7 @@ module.exports = function () {
                 username: username,
                 password: password,
             });
-            debug(this.xmpp, true);
+            // debug(this.xmpp, true);
             var _self = this;
             this.xmpp.on("error", (err) => {
                 console.error(err);
