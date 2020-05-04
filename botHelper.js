@@ -77,6 +77,10 @@ currentAns=null;
                 setting.quiz = false;
                 sendMsg('Quiz stopped.');
                 break;
+case 'quiz@next':
+currentAns =null;
+sendMsg('correct answer is '+currentAns);
+break;
             default:
                 if (msg.indexOf('addmas@') === 0 && msg.split('@').length > 1) {
                     if (setting.masters.indexOf(msg.split('@')[1]) === -1)
