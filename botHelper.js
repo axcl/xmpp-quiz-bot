@@ -55,8 +55,9 @@ module.exports = function (messageHandler, roomName, master) {
                         currentAns = data[1];
                         sendMsg(data[0])
                     } else {
-                        if (idleTry >= 5) {
+                        if (idleTry > 5) {
 idleTry=0;
+currentAns=null;
                             sendMsg('Fools Correct answer is ' + currentAns);
                         } else {
                             idleTry++;
