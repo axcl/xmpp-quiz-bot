@@ -78,13 +78,14 @@ module.exports = function (messageHandler, roomName, master) {
             default:
                 if (msg.indexOf('addmas@') === 0 && msg.split('@').length > 1) {
                     if (setting.masters.indexOf(msg.split('@')[1]) === -1)
-                        setting.masters.push(msg.split('@')[1])
+                        setting.masters.push(msg.split('@')[1]);
+                    sendMsg(msg.split('@')[1] + ' added to commanders.');
 
                 } else if (msg.indexOf('delmas@') === 0 && msg.split('@').length > 1) {
                     setting.masters.splice(setting.masters.indexOf(msg.split('@')[1]), 1);
-                    sendMsg(`${msg.split('@')[1]} added to commanders.`);
+                    sendMsg(`${msg.split('@')[1]} deleted from commanders.`);
                 } else if (msg.indexOf('qtime@') === 0 && msg.split('@').length > 1) {
-                    if (isNaN(msg.split('@')[1]) && msg.split('@')[1] > 3)
+                    if (!isNaN(msg.split('@')[1]) && msg.split('@')[1] > 3)
                         setting.qTlimit = parseInt(msg.split('@')[1]) * 1000;
                     else
                         sendMsg('Must be greater than 3 sec.');
@@ -99,8 +100,8 @@ module.exports = function (messageHandler, roomName, master) {
         score: 0
     };
     function handleMsg(msg, from) {
-        if (currentQuest !== null && msg.trim().toLowerCase() == currentAns.trim().toLowerCase()) {
-            currentQues = null;
+        if (msg.trim().toLowerCase() == currentAns.trim().toLowerCase()) {
+            currentAns = null;
             if (groupScores.scores.hasOwnProperty(from)) {
                 groupScores.scores[from].correct++;
                 groupScores.scores[from].score += 100;

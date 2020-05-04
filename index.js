@@ -17,15 +17,15 @@ const master = function () {
                     }
 
                 }
-            } else if (stanza.attrs.type === 'subscribe') {
-                let message = xml(
-                    "presence",
-                    {
-                        type: "subscribed", from: this.address,
-                        to: stanza.attrs.from
-                    });
-                id1.send(message);
             }
+        } else if (stanza.attrs.type === 'subscribe') {
+            let message = xml(
+                "presence",
+                {
+                    type: "subscribed", from: this.address,
+                    to: stanza.attrs.from
+                });
+            id1.send(message);
         }
     });
 
