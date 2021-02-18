@@ -3,7 +3,7 @@ const { xml } = require('@xmpp/client');
 const conArr = [];
 const master = function () {
     const con = new connection();
-    const id1 = con.init('cbquizbot', 'chitbuzz!123##');
+    const id1 = con.init('username', 'password');
     id1.on("stanza", async (stanza) => {
         if (stanza.is('message') && stanza.getChild('body') && stanza.getChild('body').text()) {
             if (stanza.attrs.type === 'chat') {
